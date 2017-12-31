@@ -1,4 +1,4 @@
-package com.forsrc.spark.demo;
+package com.forsrc.spark.demo.java;
 
 import java.util.Arrays;
 
