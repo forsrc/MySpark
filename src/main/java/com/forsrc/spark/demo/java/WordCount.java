@@ -1,18 +1,17 @@
 package com.forsrc.spark.demo.java;
 
-import java.util.Arrays;
-
 import org.apache.spark.SparkConf;
 import org.apache.spark.api.java.JavaPairRDD;
 import org.apache.spark.api.java.JavaRDD;
 import org.apache.spark.api.java.JavaSparkContext;
 import org.apache.spark.api.java.function.FlatMapFunction;
 import org.apache.spark.api.java.function.Function2;
-import org.apache.spark.api.java.function.PairFlatMapFunction;
 import org.apache.spark.api.java.function.PairFunction;
 import org.apache.spark.api.java.function.VoidFunction;
-
 import scala.Tuple2;
+
+import java.util.Arrays;
+import java.util.Iterator;
 
 public class WordCount {
 
@@ -30,8 +29,8 @@ public class WordCount {
         JavaRDD<String> wordsRdd = dataRdd.flatMap(new FlatMapFunction<String, String>() {
 
             @Override
-            public Iterable<String> call(String line) throws Exception {
-                return Arrays.asList(line.split(" "));
+            public Iterator<String> call(String line) throws Exception {
+                return Arrays.asList(line.split(" ")).iterator();
             }
         });
         JavaPairRDD<String, Integer> wordCountPairRdd = wordsRdd.mapToPair(new PairFunction<String, String, Integer>() {
